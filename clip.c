@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <math.h>
+#include <portaudio.h>
 
 /*
     *
@@ -14,6 +15,8 @@
     * I just converted it to fit the requirements of this assignment and added some comments
     * 
 */
+
+
 
 int main()
 {
@@ -25,18 +28,54 @@ int main()
     int32_t length = frame_count*chan_num*bits / 8; 
     int16_t byte;
 
-    float sync_level = 1.0;
+    float sync_level = 0.25;
     float multiplier = 32767 / sync_level;
 
+    float pitch = 440.0;
+
+    int isHighNote = 1;
 
     int16_t *channel = (int16_t *) malloc(frame_count * sizeof(int16_t));
     for (int i=0; i < frame_count; i++) {
+
+        /*
+        //alternate pitch
+        if((i % 2000) == 0){
+           if(isHighNote == 0) {
+                pitch = pitch / 2; 
+                isHighNote = 1;
+           }
+           else {
+                pitch *= 2; 
+                isHighNote = 0;
+           }
+        }
+        */
+
         // generate a sine wave
-        channel[i] = (int16_t)(sync_level * sinf(2.0 * 3.14159265 * 440.0 * i / rate)*multiplier);
+        channel[i] = (int16_t)(sync_level * sinf(2.0 * 3.14159265 * pitch * i / rate)*multiplier);
+        channel[i] = channel[i] / 2;
+
+        /*
+        //adsr (decay)
+        if (multiplier > 0){
+            multiplier -= 1;
+            printf("Multiplier: %fl\n", multiplier);
+        }
+
+        */
+        /* 
+        //clip
+        if (channel[i] > 8192) {
+            channel[i] = 8192;
+        } else if (channel[i] < -8192) {
+            channel[i] = -8192;
+        }
+        */
     }
 
     // Writes data to wav file
-    FILE *fp = fopen("clip.wav", "wb"); // Open the file in binary mode for writing
+    FILE *fp = fopen("sine.wav", "wb"); // Open the file in binary mode for writing
     if (fp == NULL)
     {
         printf("Output file couldn't be opened!\n");

@@ -1,3 +1,17 @@
+
+/*
+ *
+ * For writng the wav files, I used code from:
+ * https://stackoverflow.com/questions/76059971/how-do-i-write-a-wav-file-in-c*
+ * 
+ * The PaCallback function is my modified version of an example 
+ * from the portaudio documentation
+ * 
+*/
+
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>

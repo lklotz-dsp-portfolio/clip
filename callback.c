@@ -1,7 +1,3 @@
-// Source - https://stackoverflow.com/a/76077391
-// Posted by EmilioPeJu, modified by community. See post 'Timeline' for change history
-// Retrieved 2026-04-07, License - CC BY-SA 4.0
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>

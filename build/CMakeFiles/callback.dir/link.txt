@@ -1,0 +1,1 @@
+/usr/bin/cc  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/callback.dir/callback.c.o -o callback   -L/opt/homebrew/Cellar/portaudio/19.7.0/lib  -Wl,-rpath,/opt/homebrew/Cellar/portaudio/19.7.0/lib -lportaudio -framework CoreAudio -framework AudioToolbox -framework AudioUnit -framework CoreFoundation -framework CoreServices
